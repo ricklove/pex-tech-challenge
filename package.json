@@ -1,0 +1,18 @@
+{
+  "name": "pex-tech-challenge",
+  "version": "1.0.0",
+  "description": "Pex Tech Challenge by Rick Love",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "author": "Rick Love",
+  "license": "MIT",
+  "dependencies": {
+    "immutable": "^4.0.0-rc.12"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^6.0.2"
+  }
+}
