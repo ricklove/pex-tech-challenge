@@ -27,7 +27,7 @@ function concat(arrays) {
     .reduce((out, x) => out = out.concat(x), []);
 }
 
-function joinStringWithPeriod(items) {
+function joinStringsWithPeriod(items) {
   return !items.length ? ''
     : distinct(items).join('. ') + '.';
 }
@@ -38,20 +38,20 @@ function flattenToStringArray(obj) {
       : [obj];
 }
 
-function flattenToStringArray_top(obj) {
-  return joinStringWithPeriod(flattenToStringArray(obj));
+function flattenToStringArrayStart(obj) {
+  return joinStringsWithPeriod(flattenToStringArray(obj));
 }
 
 function flattenOnlyStringListArray(obj) {
   return isMap(obj) ? Immutable.Map(obj.keySeq().toArray().map(k => [k, flattenOnlyStringListArray(obj.get(k))]))
-    : isStringList(obj) ? joinStringWithPeriod(obj.toArray())
+    : isStringList(obj) ? joinStringsWithPeriod(obj.toArray())
       : isList(obj) ? Immutable.List(obj.toArray().map(x => flattenOnlyStringListArray(x)))
         : obj;
 }
 
 function transformErrors(obj, keepFields) {
   return Immutable.Map(obj.keySeq().toArray().map(k =>
-    [k, keepFields.indexOf(k) >= 0 ? flattenOnlyStringListArray(obj.get(k)) : flattenToStringArray_top(obj.get(k))]
+    [k, keepFields.indexOf(k) >= 0 ? flattenOnlyStringListArray(obj.get(k)) : flattenToStringArrayStart(obj.get(k))]
   ));
 }
 
